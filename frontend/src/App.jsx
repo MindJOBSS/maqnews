@@ -2,9 +2,9 @@ import React from 'react'
 import {Routes , Route} from "react-router-dom";
 import ThemeButton from './components/themeButton'
 import Navbar from './components/Navbar'
-import Trending from './components/Trending'
-import Recent from './components/Recent';
-import ForYou from './components/ForYou';
+import Trending from '../pages/Trending'
+import Recent from '../pages/Recent';
+import ForYou from '../pages/ForYou';
 import Search from './components/Search';
 
 const App = () => {

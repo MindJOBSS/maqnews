@@ -28,6 +28,7 @@ router.post("/", async (req, res) => {
 
 router.patch("/", async (req, res) => {
     try {
+        console.log(req.body);
         const { category } = req.body;
 
         if (!category) {

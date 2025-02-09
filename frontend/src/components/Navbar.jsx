@@ -1,11 +1,16 @@
 import React,{useState} from 'react'
 import {useNavigate} from "react-router-dom"
 import { FaSearch } from "react-icons/fa";
+import axios from 'axios';
 
 const Navbar = () => {
 
     const navigate = useNavigate();
     const [search , setSearch] = useState();
+    const BACKEND_URL = "http://localhost:5555/";
+    const HEADER = {
+        headers: { "Content-Type": "application/json" }
+    }
 
     function handleTrending(){
         navigate("/trending");
@@ -19,12 +24,27 @@ const Navbar = () => {
         navigate("/foryou");
     }
 
-    function handleClick() {
-        navigate(`/search/${search}`);
+    async function handleClick() {
+        if (!search.trim()) {
+            console.log("Search field is empty");
+            return;
+        }
+    
+        try {
+            const body = {
+                category : search.toLowerCase(),
+            };
+    
+            const response = await axios.patch(BACKEND_URL, body, HEADER);
+            console.log("Updated category:", response.data); 
+    
+            navigate(`/search/${search}`);
+        } catch (error) {
+            console.error("Error updating category:", error.message);
+        }
     }
 
     function handleChange(event){
-        event.preventDefault();
         const {value} = event.target;
         setSearch(value);
     }

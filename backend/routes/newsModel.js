@@ -62,8 +62,6 @@ router.get("/news", async (req, res) => {
             console.log("No categories found.");
             return null;
         }
-
-        console.log("Top category:", topCategory);
         return res.status(201).send(topCategory);
 
     } catch (error) {

@@ -3,7 +3,7 @@ import axios from "axios";
 import Loader from "../src/components/Loader";
 
 const ForYou = () => {
-  const [query, setQuery] = useState("everything");
+  const [query, setQuery] = useState("");
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,9 +16,8 @@ const ForYou = () => {
     const fetchCategory = async () => {
       try {
         const response = await axios.get(BACKEND_URL);
-        if (response.data && response.data.category) {
-          setQuery(response.data.category);
-        }
+        const q = response.data.category;
+        setQuery(q);
       } catch (error) {
         console.error("Error fetching category:", error.message);
       }
@@ -56,11 +55,7 @@ const ForYou = () => {
           {news.map((post, index) => (
             <div key={index} className="card card-xs w-108 card-side card-border bg-base-200">
               <figure>
-                <img
-                  src={post.urlToImage || "https://via.placeholder.com/150"}
-                  alt="news preview"
-                  className="w-full h-32 object-cover"
-                />
+                  {post.urlToImage? <img src={post.urlToImage} alt="news preview" /> : <div className="skeleton h-full w-64" />}
               </figure>
               <div className="card-body">
                 <div className="card-title">{post.title}</div>

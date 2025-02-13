@@ -36,11 +36,12 @@ const Navbar = () => {
             };
     
             const response = await axios.patch(BACKEND_URL, body, HEADER);
-            console.log("Updated category:", response.data); 
     
             navigate(`/search/${search}`);
         } catch (error) {
             console.error("Error updating category:", error.message);
+        }finally{
+            setSearch("");
         }
     }
 
@@ -56,7 +57,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-center">
                 <div className="searchBar join">
-                    <input type="text" className='input join-item w-96' placeholder='search news' onChange={handleChange} />
+                    <input type="text" className='input join-item w-96' placeholder='search news' onChange={handleChange} value={search} />
                     <button className='btn btn-outline join-item bg-neutral btn-md' onClick={handleClick}>
                         <FaSearch size={22} className='text-neutral-content' />
                     </button>

@@ -32,7 +32,7 @@ const Recent = () => {
                     {news?.map((post, index) => (
                         <div key={index} className="card card-xs w-108 card-side card-border bg-base-200">
                             <figure>
-                                <img src={post.urlToImage} alt="news preview" />
+                                {post.urlToImage? <img src={post.urlToImage} alt="news preview" /> : <div className="skeleton h-full w-64" />}
                             </figure>
                             <div className="card-body">
                                 <div className="card-title">{post.title}</div>
